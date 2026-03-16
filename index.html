@@ -66,6 +66,13 @@ function search(){
 
 var value=document.getElementById("searchBox").value;
 
+if(value==""){
+document.getElementById("result").innerHTML="Please enter CNIC or Mobile";
+return;
+}
+
+document.getElementById("result").innerHTML="Searching...";
+
 fetch("https://script.google.com/macros/s/AKfycbzA0U1dZPFj2T_aE3gWlvPXPhB-t5JjjFCp0QO8OaKuiCy4BA6jUnBw5RLvxycI2VD5/exec?q="+value)
 
 .then(res=>res.json())
@@ -73,18 +80,22 @@ fetch("https://script.google.com/macros/s/AKfycbzA0U1dZPFj2T_aE3gWlvPXPhB-t5JjjF
 
 if(data==null){
 
-document.getElementById("result").innerHTML="Not registered";
+document.getElementById("result").innerHTML=
+"<p style='color:red'>YOU ARE NOT A REGISTERED BENEFICIARY</p>";
 
 }else{
 
 document.getElementById("result").innerHTML=
-"Name: "+data.name+"<br>"+
-"CNIC: "+data.cnic+"<br>"+
-"Mobile: "+data.mobile;
+"<b>Name:</b> "+data.name+"<br>"+
+"<b>CNIC:</b> "+data.cnic+"<br>"+
+"<b>Mobile:</b> "+data.mobile;
 
 }
 
 })
+.catch(err=>{
+document.getElementById("result").innerHTML="Error connecting to server";
+});
 
 }
 
