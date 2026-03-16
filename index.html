@@ -213,7 +213,7 @@
         if (response.success && response.data) {
           showResult(response.data);
         } else {
-          showError(response.message || "'<div class="result error">YOU ARE NOT A REGISTERED BENEFICIARY</div>'");
+          showError(response.message || "YOU ARE NOT A REGISTERED BENEFICIARY");
         }
 
         delete window[callbackName];
